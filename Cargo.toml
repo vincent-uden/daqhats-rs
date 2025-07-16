@@ -1,9 +1,24 @@
 [package]
 name = "daqhats-rs"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+authors = ["Vincent Udén vincentuden@gmail.com"]
+description = "Rust bindings for the MCC DAQ HAT Library for Raspberry Pi data acquisition devices"
+license = "MIT"
+repository = "https://github.com/vincent-uden/daqhats-rs"
+homepage = "https://github.com/vincent-uden/daqhats-rs"
+documentation = "https://docs.rs/daqhats-rs"
+readme = "README.md"
+keywords = ["raspberry-pi", "daq", "data-acquisition", "mcc", "hardware"]
+categories = ["hardware-support", "embedded", "api-bindings"]
+exclude = ["lib/build/", "target/"]
 
 [dependencies]
 
 [build-dependencies]
 bindgen = "0.72.0"
+
+[package.metadata.docs.rs]
+# Don't build C library on docs.rs since it requires Raspberry Pi hardware
+default-target = "x86_64-unknown-linux-gnu"
+targets = ["armv7-unknown-linux-gnueabihf", "aarch64-unknown-linux-gnu"]
