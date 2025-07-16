@@ -22,3 +22,7 @@ bindgen = "0.72.0"
 # Don't build C library on docs.rs since it requires Raspberry Pi hardware
 default-target = "x86_64-unknown-linux-gnu"
 targets = ["armv7-unknown-linux-gnueabihf", "aarch64-unknown-linux-gnu"]
+
+[[example]]
+name = "single_value_read"
+doc-scrape-examples = true

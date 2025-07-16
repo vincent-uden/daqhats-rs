@@ -37,14 +37,14 @@ use daqhats_rs::*;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // List all connected DAQ HATs
-    let count = unsafe { hat_list(HatIDs_HAT_ID_ANY, std::ptr::null_mut()) };
+    let count = unsafe { hat_list(HatIDs_HAT_ID_ANY as u16, std::ptr::null_mut()) };
     println!("Found {} DAQ HAT devices", count);
 
     if count > 0 {
         // Allocate memory for device info
-        let mut devices = vec![HatInfo::default(); count as usize];
+        let mut devices = vec![HatInfo { address: 0, id: 0, version: 0, product_name: [0; 256] }; count as usize];
         unsafe {
-            hat_list(HatIDs_HAT_ID_ANY, devices.as_mut_ptr());
+            hat_list(HatIDs_HAT_ID_ANY as u16, devices.as_mut_ptr());
         }
 
         for device in devices {
@@ -55,6 +55,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
+## Examples
+
+The library includes examples demonstrating common usage patterns:
+
+```bash
+# Run the single value read example (requires MCC 128 hardware)
+cargo run --example single_value_read
+```
+
+See the `examples/` directory for more detailed usage examples.
 
 ## Safety
 
